@@ -7,7 +7,7 @@ function Profile() {
 
   const user = localStorage.getItem('user');
 
-  const { email } = user ? JSON.parse(user) : { email: '' };
+  const { email } = JSON.parse(user) || { email: '' };
 
   const doneRecipes = () => {
     history.push('/done-recipes');
