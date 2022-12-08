@@ -26,34 +26,16 @@ function RecipeInProgress() {
 
   const toggleFavorite = (favorite) => {
     if (!isFavorite) {
-      favorites.push({
+      const newfavorites = [...favorites, {
         id: favorite.id,
         type: favorite.type,
-        nationality: favorite.nationality
-          ? favorite.nationality : '',
+        nationality: favorite.nationality || '',
         category: favorite.category,
-        alcoholicOrNot: favorite.alcoholic
-          ? favorite.alcoholic : '',
-        tags: favorite.tags
-          ? favorite.tags : '',
+        alcoholicOrNot: favorite.alcoholic || '',
         name: favorite.title,
         image: favorite.photo,
-      });
-      localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
-      setFavorites([{
-        ...favoritesState,
-        id: favorite.id,
-        type: favorite.type,
-        nationality: favorite.nationality
-          ? favorite.nationality : '',
-        category: favorite.category,
-        alcoholicOrNot: favorite.alcoholic
-          ? favorite.alcoholic : '',
-        tags: favorite.tags
-          ? favorite.tags : '',
-        name: favorite.title,
-        image: favorite.photo,
-      }]);
+      }];
+      setFavorites(localStorage.setItem('favoriteRecipes', JSON.stringify(newfavorites)));
     } else {
       const filter = favorites.filter((e) => e.id !== String(id));
       localStorage.setItem('favoriteRecipes', JSON.stringify(filter));
@@ -207,7 +189,7 @@ function RecipeInProgress() {
           title={ recipe.title }
           width="340"
           height="191"
-          src={ `${recipe.video}&autoplay=0` }
+          src={ `${recipe.video}` }
           allowFullScreen
           data-testid="video"
         />

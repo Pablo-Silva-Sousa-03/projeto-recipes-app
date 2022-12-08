@@ -26,9 +26,7 @@ const mapToSameAPI = (type, data) => {
   }
 
   if (type.startsWith('meals')) {
-    const url = new URL(data.strYoutube);
-
-    const video = `${url.origin}/embed/${url.searchParams.get('v')}`;
+    const video = data.strYoutube.replace('/watch?v=', '/embed/');
 
     return {
       type: 'meal',
