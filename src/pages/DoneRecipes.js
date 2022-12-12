@@ -1,20 +1,20 @@
-import clipboardCopy from 'clipboard-copy';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import '../index.css';
+import './RecipeDetails.css';
 
 function DoneRecipes() {
   const [doneRecipes, setdoneRecipes] = useState([]);
-  const [copied, setCopied] = useState(false);
+  // const [copied, setCopied] = useState(false);
 
   const recipes = JSON.parse(localStorage.getItem('doneRecipes'));
 
   useEffect(() => {
     const recipesInit = JSON.parse(localStorage.getItem('doneRecipes'));
     setdoneRecipes(
-      recipesInit || [],
+      recipesInit,
     );
   }, []);
 
@@ -29,17 +29,27 @@ function DoneRecipes() {
   };
 
   const filterAll = () => {
-    setdoneRecipes(recipes || []);
+    setdoneRecipes(recipes);
   };
 
-  const shareRecipe = (id, type) => {
-    const two = 2000;
-    const link = `http://localhost:3000/${type}s/${id}`;
-    clipboardCopy(link);
-    setCopied(true);
+  // const shareRecipe = (id, type) => {
+  //   const two = 2000;
+  //   const link = `http://localhost:3000/${type}s/${id}`;
+  //   clipboardCopy(link);
+  //   setCopied(true);
+  //   setTimeout(() => {
+  //     setCopied(false);
+  //   }, two);
+  // };
+
+  const handleCopy = async (type, id) => {
+    const THREESECONDS = 3000;
+    document.getElementById('copyMessage').style.display = 'inline';
     setTimeout(() => {
-      setCopied(false);
-    }, two);
+      document.getElementById('copyMessage').style.display = 'none';
+    }, THREESECONDS);
+    // copy(`http://localhost:3000${pathname}`);
+    navigator.clipboard.writeText(`http://localhost:3000/${type}s/${id}`);
   };
 
   return (
@@ -70,22 +80,22 @@ function DoneRecipes() {
 
       </button>
       {
-        copied === true ? <p>Link copied!</p> : ''
-      }
-      {
-        doneRecipes.map((recipe, i) => (
+        doneRecipes?.map((recipe, i) => (
           <div
             key={ recipe.id }
             className="card"
           >
             <button
+              src={ shareIcon }
               type="button"
               data-testid={ `${i}-horizontal-share-btn` }
-              src={ shareIcon }
-              onClick={ () => { shareRecipe(recipe.id, recipe.type); } }
+              onClick={ () => handleCopy(recipe.type, recipe.id) }
             >
-              <img src={ shareIcon } alt="compartilhar" />
+              <img src={ shareIcon } alt="Compartilhar" />
             </button>
+            <span className="copyMessage" id="copyMessage">
+              Link copied!
+            </span>
 
             <Link
               to={ `/${recipe.type}s/${recipe.id}` }
@@ -130,5 +140,5 @@ function DoneRecipes() {
     </div>
   );
 }
-
+DoneRecipes.propTypes = {}.isRequired;
 export default DoneRecipes;

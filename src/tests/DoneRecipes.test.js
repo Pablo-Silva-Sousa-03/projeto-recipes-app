@@ -1,11 +1,17 @@
-import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import React from 'react';
 import { renderWithRouterAndRedux } from '../helpers/renderWith';
 import DoneRecipes from '../pages/DoneRecipes';
 
 describe('Testes do componente <DoneRecipes />', () => {
-  it('', () => {
+  beforeEach(() => {
+    navigator.clipboard = {
+      writeText: jest.fn(),
+    };
+  });
+
+  it('', async () => {
     localStorage.setItem('doneRecipes', JSON.stringify(
       [{
         id: '52977',
@@ -30,6 +36,13 @@ describe('Testes do componente <DoneRecipes />', () => {
     ));
 
     renderWithRouterAndRedux(<DoneRecipes />, { initialEntries: ['/done-recipes'] });
+    const shareBtn = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(shareBtn);
+    const copiedSpan = screen.getAllByText('Link copied!');
+    await waitFor(
+      () => expect(copiedSpan[0]).toHaveStyle({ display: 'none' }),
+      { timeout: 4000 },
+    );
     const filterMealsButton = screen.getByTestId('filter-by-meal-btn');
     userEvent.click(filterMealsButton);
     const filterDrinksButton = screen.getByTestId('filter-by-drink-btn');

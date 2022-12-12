@@ -22,19 +22,6 @@ function withRedux(component, store) {
   );
 }
 
-export function renderWithRouter(
-  component,
-  {
-    initialEntries = ['/'],
-    history = createMemoryHistory({ initialEntries }),
-  } = {},
-) {
-  return {
-    ...render(withRouter(component, history)),
-    history,
-  };
-}
-
 export function renderWithRedux(component, options = {}) {
   const {
     initialState = {},

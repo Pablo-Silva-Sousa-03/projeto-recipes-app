@@ -4,16 +4,16 @@ import { useParams } from 'react-router-dom';
 import ButtonRecipeStatus from '../components/ButtonRecipeStatus';
 import HeaderDetails from '../components/HeaderDetails';
 import Recommendations from '../components/Recommendations';
-import useBasePath from '../hooks/useBasePath';
-import useRecipe from '../hooks/useRecipe';
-import shareIcon from '../images/shareIcon.svg';
-import './RecipeDetails.css';
 import { getDrinksForRecommendation } from '../helpers/drinkApi';
 import { getMealsForRecommendation } from '../helpers/foodApi';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import useBasePath from '../hooks/useBasePath';
+import useRecipe from '../hooks/useRecipe';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import './RecipeDetails.css';
 
-const copy = require('clipboard-copy');
+// const copy = require('clipboard-copy');
 
 function RecipeDetails(props) {
   const basePath = useBasePath();
@@ -68,7 +68,8 @@ function RecipeDetails(props) {
     setTimeout(() => {
       document.getElementById('copyMessage').style.display = 'none';
     }, THREESECONDS);
-    copy(`http://localhost:3000${pathname}`);
+    // copy(`http://localhost:3000${pathname}`);
+    navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
   };
 
   if (loading) return 'Loading...';
