@@ -21,6 +21,7 @@ describe('Testes do componente <RecipeDetails />', () => {
     userEvent.click(favoriteBtn);
     expect(favoriteBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
     const shareBtn = screen.getByTestId('share-btn');
+    userEvent.click(favoriteBtn);
     userEvent.click(shareBtn);
     await waitFor(
       () => expect(screen.getByText('Link copied!')).toHaveStyle({ display: 'none' }),
