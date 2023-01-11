@@ -3,14 +3,14 @@ import { useCallback, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import HeaderDetails from '../components/HeaderDetails';
 import Recommendations from '../components/Recommendations';
-import useBasePath from '../hooks/useBasePath';
-import useRecipe from '../hooks/useRecipe';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import './RecipeDetails.css';
 import { getDrinksForRecommendation } from '../helpers/drinkApi';
 import { getMealsForRecommendation } from '../helpers/foodApi';
+import useBasePath from '../hooks/useBasePath';
+import useRecipe from '../hooks/useRecipe';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import './RecipeDetails.css';
 
 const copy = require('clipboard-copy');
 
@@ -109,7 +109,6 @@ function RecipeInProgress() {
   };
 
   if (loading) return 'Loading...';
-
   return (
     <>
       <HeaderDetails />
@@ -124,7 +123,7 @@ function RecipeInProgress() {
         <div className="card-img-overlay">
           <div>
             <p data-testid="recipe-category">
-              {basePath === 'meals' ? recipe.category : recipe.alcoholic}
+              {basePath === 'meals/in-progress' ? recipe.category : recipe.alcoholic}
             </p>
           </div>
           <h5 className="card-title" data-testid="recipe-title">

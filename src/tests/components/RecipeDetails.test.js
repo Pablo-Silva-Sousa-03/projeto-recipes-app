@@ -13,6 +13,28 @@ describe('Testes do componente <RecipeDetails />', () => {
   });
 
   it('Testa Meals Details', async () => {
+    localStorage.setItem('doneRecipes', JSON.stringify(
+      [{
+        id: '52977',
+        type: 'meal',
+        nationality: 'Turkish',
+        category: 'Side',
+        name: 'Corba',
+        image: 'https://www.themealdb.com//images//media//meals//58oia61564916529.jpg',
+        doneDate: '05/12/2022',
+        tags: ['soup'],
+      }, {
+        id: '15288',
+        type: 'drink',
+        nationality: '',
+        category: 'Shot',
+        alcoholicOrNot: 'Alcoholic',
+        name: '252',
+        image: 'https://www.thecocktaildb.com//images//media//drink//rtpxqw1468877562.jpg',
+        doneDate: '05/12/2021',
+        tags: [],
+      }],
+    ));
     renderWithRouterAndRedux(<App />, { initialEntries: ['/meals/52977'] });
     expect(await screen.findByTestId('recipe-title'))
       .toHaveTextContent('Corba');
@@ -44,5 +66,6 @@ describe('Testes do componente <RecipeDetails />', () => {
       { timeout: 4000 },
     );
     expect(screen.getByTestId('0-recommendation-title')).toBeInTheDocument();
+    userEvent.click(screen.getByTestId('start-recipe-btn'));
   });
 });
