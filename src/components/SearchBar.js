@@ -11,6 +11,7 @@ function SearchBar() {
     searchTerm: '',
     searchType: '',
   });
+
   const [recipes, setRecipes] = useState([]);
   const location = useLocation();
   const history = useHistory();
