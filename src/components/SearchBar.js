@@ -42,10 +42,8 @@ function SearchBar() {
         }
       }
       setRecipes(data);
-      setError(false);
     } catch (e) {
       global.alert('Sorry, we haven\'t found any recipes for these filters.');
-      setError(true);
     }
   }
 
