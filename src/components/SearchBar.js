@@ -12,7 +12,6 @@ function SearchBar() {
     searchType: '',
   });
   const [recipes, setRecipes] = useState([]);
-  const [error, setError] = useState(false);
   const location = useLocation();
   const history = useHistory();
   const TWELVE = 12;
