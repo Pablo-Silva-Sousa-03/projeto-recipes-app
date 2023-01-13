@@ -1,13 +1,14 @@
-import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { renderWithRouterAndRedux } from '../../helpers/renderWith';
+import React from 'react';
 import SearchBar from '../../components/SearchBar';
+import { renderWithRouterAndRedux } from '../../helpers/renderWith';
 
 describe('Testes do componente <SearchBar />', () => {
   const ingredientId = 'ingredient-search-radio';
   const inputId = 'search-input';
   const buttonId = 'exec-search-btn';
+  const firstLetter = 'first-letter-search-radio';
   it('', async () => {
     renderWithRouterAndRedux(<SearchBar />, { initialEntries: ['/meals'] });
     const searchInput = await screen.findByTestId(inputId);
@@ -24,7 +25,7 @@ describe('Testes do componente <SearchBar />', () => {
     renderWithRouterAndRedux(<SearchBar />, { initialEntries: ['/meals'] });
     const searchInput = await screen.findByTestId(inputId);
     userEvent.type(searchInput, 'beef');
-    const inputRadious = await screen.findByTestId('first-letter-search-radio');
+    const inputRadious = await screen.findByTestId(firstLetter);
     userEvent.click(inputRadious);
     const button = await screen.findByTestId(buttonId);
     userEvent.click(button);
@@ -47,6 +48,15 @@ describe('Testes do componente <SearchBar />', () => {
     const searchInput = await screen.findByTestId(inputId);
     userEvent.type(searchInput, 'Banana Pancakes');
     const inputRadious = await screen.findByTestId('name-search-radio');
+    userEvent.click(inputRadious);
+    const button = await screen.findByTestId(buttonId);
+    userEvent.click(button);
+  });
+  it('', async () => {
+    renderWithRouterAndRedux(<SearchBar />, { initialEntries: ['/meals'] });
+    const searchInput = await screen.findByTestId(inputId);
+    userEvent.type(searchInput, 'a');
+    const inputRadious = await screen.findByTestId(firstLetter);
     userEvent.click(inputRadious);
     const button = await screen.findByTestId(buttonId);
     userEvent.click(button);
@@ -75,6 +85,24 @@ describe('', () => {
     const searchInput = await screen.findByTestId(inputId);
     userEvent.type(searchInput, 'apple');
     const inputRadious = await screen.findByTestId(ingredientId);
+    userEvent.click(inputRadious);
+    const button = await screen.findByTestId(buttonId);
+    userEvent.click(button);
+  });
+  it('', async () => {
+    renderWithRouterAndRedux(<SearchBar />, { initialEntries: ['/drinks'] });
+    const searchInput = await screen.findByTestId(inputId);
+    userEvent.type(searchInput, 'a');
+    const inputRadious = await screen.findByTestId('first-letter-search-radio');
+    userEvent.click(inputRadious);
+    const button = await screen.findByTestId(buttonId);
+    userEvent.click(button);
+  });
+  it('', async () => {
+    renderWithRouterAndRedux(<SearchBar />, { initialEntries: ['/drinks'] });
+    const searchInput = await screen.findByTestId(inputId);
+    userEvent.type(searchInput, 'GG');
+    const inputRadious = await screen.findByTestId('name-search-radio');
     userEvent.click(inputRadious);
     const button = await screen.findByTestId(buttonId);
     userEvent.click(button);

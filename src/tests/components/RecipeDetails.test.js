@@ -67,5 +67,7 @@ describe('Testes do componente <RecipeDetails />', () => {
     );
     expect(screen.getByTestId('0-recommendation-title')).toBeInTheDocument();
     userEvent.click(screen.getByTestId('start-recipe-btn'));
+    const homeBtn = await screen.findByTestId('homeBtn');
+    userEvent.click(homeBtn);
   });
 });

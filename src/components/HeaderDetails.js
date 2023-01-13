@@ -8,6 +8,6 @@ export default function HeaderDetails() {
     push('/meals');
   };
   return (
-    <GrHomeRounded onClick={ handleHome } />
+    <GrHomeRounded data-testid="homeBtn" onClick={ handleHome } />
   );
 }
