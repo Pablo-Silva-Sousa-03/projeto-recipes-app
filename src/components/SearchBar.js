@@ -62,7 +62,6 @@ function SearchBar() {
           value={ search.searchTerm }
           onChange={ handleChange }
         />
-        {error && <h2>Não encontramos nenhuma receita</h2>}
         <div className="inline-radios mx-auto">
           <label htmlFor="searchType">
             Ingredient
